@@ -51,6 +51,7 @@ public class HomeController {
             dto.setTitle(name + "/" + rate.getName());
             dto.setIn(Formater.formatDouble(dest.getBought_in() / rate.getBought_in(), 2));
             dto.setOut(Formater.formatDouble(dest.getRate() / rate.getRate(), 2));
+            dto.setRate(Formater.formatDouble(rate.getRate(), 2));
             rateDTOS.add(dto);
         }
         return rateDTOS;
@@ -67,6 +68,6 @@ public class HomeController {
     public String calculate(String inName, String outName, Integer count) {
         Rate in = rateService.getByName(inName);
         Rate out = rateService.getByName(outName);
-        return Formater.formatDouble(in.getRate() / out.getRate() * count).toString();
+        return Formater.formatDouble(in.getRate() / out.getRate() * count, 2).toString();
     }
 }

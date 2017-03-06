@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,7 +142,7 @@ public class GetRateSchedule {
                     if (rate.getRate() != null) {
                         rate.setRate(rate.getRate() + 0.168);
                     }
-                    rate.setOrder(index * 10);
+                    rate.setCreateTime(new Date());
                     rateService.save(rate);
                 }
             }

@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Repository
 public interface RateDao extends JpaRepository<Rate, Long> {
-    @Query("select t FROM Rate t where t.rate is not null order by t.order desc,t.name")
+    @Query("select t FROM Rate t where t.rate is not null order by t.order,t.name")
     List<Rate> query(Pageable pageable);
 
     @Query("select r from Rate r where r.name=?1")

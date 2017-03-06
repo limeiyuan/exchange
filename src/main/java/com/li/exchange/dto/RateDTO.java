@@ -9,6 +9,7 @@ public class RateDTO {
     private String title;
     private Double in;
     private Double out;
+    private Double rate;
 
     public String getName() {
         return name;
@@ -40,5 +41,13 @@ public class RateDTO {
 
     public void setOut(Double out) {
         this.out = out;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
     }
 }

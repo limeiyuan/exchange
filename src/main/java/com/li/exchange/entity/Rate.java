@@ -87,4 +87,12 @@ public class Rate {
     public void setOrder(Integer order) {
         this.order = order;
     }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

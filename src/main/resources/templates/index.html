@@ -36,7 +36,7 @@
         <tr class="title">
             <td>货币对</td>
             <td>买入价</td>
-            <td>卖出价</td>
+            <td>汇率</td>
         </tr>
     </table>
 </div>
@@ -93,7 +93,7 @@
                 if (index % 2 != 0) {
                     $tr.addClass('obb');
                 }
-                $tr.append('<td>' + item['name'] + '</td><td>' + item['in'] + '</td><td>' + item['out'] + '</td>');
+                $tr.append('<td>' + item['name'] + '</td><td>' + item['in'] + '</td><td>' + item['rate'] + '</td>');
                 $('#rateTable').append($tr);
             }
         });

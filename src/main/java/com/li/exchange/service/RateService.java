@@ -20,7 +20,7 @@ public class RateService {
     private RateDao rateDao;
 
     public List<Rate> query() {
-        Pageable pageable = new PageRequest(0, 8);
+        Pageable pageable = new PageRequest(0, 9);
         return rateDao.query(pageable);
     }
 
