@@ -1,0 +1,16 @@
+h2 {
+    color: darkred;
+}
+
+table {
+    align-items: center;
+    text-align: center;
+}
+
+table .title td {
+    background: #666666;
+}
+
+table .obb {
+    background: #aaaaaa;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>实时汇率查询</title>
+    <link type="text/css" href="css/main.css"/>
+    <style type="text/css">
+        h2 {
+            color: darkred;
+        }
+
+        table {
+            align-items: center;
+            text-align: center;
+        }
+
+        table .title td {
+            background: #666666;
+        }
+
+        table .obb {
+            background: #aaaaaa;
+        }
+
+        table input, select {
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div class="main">
+    <h2>实时汇率</h2>
+    <table id="rateTable">
+        <tr class="title">
+            <td>货币对</td>
+            <td>买入价</td>
+            <td>卖出价</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h3 class="exchange">货币兑换器</h3>
+    <form id="calForm">
+        <table>
+
+            <tr>
+                <td>
+                    买入货币：
+                </td>
+                <td>
+                    <select id="nameOut" name="inName"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    卖出货币：
+                </td>
+                <td>
+                    <select id="nameIn" name="outName"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    卖出金额：
+                </td>
+                <td>
+                    <input name="count" id="count" placeholder="1000">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    买入金额：
+                </td>
+                <td>
+                    <input name="bought_in" id="bought_in" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" onclick="calculate()">计算</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get('getRate', function (response) {
+            var index = 0, item;
+            for (index; index < response.length; index++) {
+                item = response[index];
+                var $tr = $('<tr>');
+                if (index % 2 != 0) {
+                    $tr.addClass('obb');
+                }
+                $tr.append('<td>' + item['name'] + '</td><td>' + item['in'] + '</td><td>' + item['out'] + '</td>');
+                $('#rateTable').append($tr);
+            }
+        });
+
+        $.get('getNames', function (response) {
+            var index = 0, item;
+            for (index; index < response.length; index++) {
+                item = response[index];
+                var $op1 = $('<option value="' + item + '">' + item + '</option>');
+                var $op2 = $('<option value="' + item + '">' + item + '</option>');
+                $('#nameOut').append($op1);
+                $('#nameIn').append($op2);
+            }
+        });
+    });
+
+    function calculate() {
+        var bought_in = $('#nameIn').val();
+        var bought_out = $('#nameOut').val();
+        var count = $('#count').val();
+        if (bought_in && bought_out && count) {
+            $.ajax({
+                url: 'calculate',
+                type: 'POST',
+                data: $('#calForm').serialize(),
+                success: function (value) {
+                    $('#bought_in').val(value);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
