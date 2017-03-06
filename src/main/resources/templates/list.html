@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>汇率数据源展示</title>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div>
+    <h2>实时汇率</h2>
+    <table id="rateTable" border="1">
+        <tr class="title">
+            <td>名称</td>
+            <td>买入价</td>
+            <td>卖出价</td>
+            <td>汇率</td>
+            <td>更新时间</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get('list', function (response) {
+            var index = 0, item;
+            for (index; index < response.length; index++) {
+                item = response[index];
+                var $tr = $('<tr>');
+                if (index % 2 != 0) {
+                    $tr.addClass('obb');
+                }
+                $tr.append('<td>' + item['name'] + '</td><td>' + item['bought_in'] + '</td><td>' + item['bought_out'] + '</td><td>' + item['rate'] + '</td><td>' + item['timeStr'] + '</td>');
+                $('#rateTable').append($tr);
+            }
+        });
+    });
+</script>
+</html>

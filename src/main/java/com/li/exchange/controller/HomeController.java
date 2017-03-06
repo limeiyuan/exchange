@@ -37,7 +37,7 @@ public class HomeController {
         if (dest == null) {
             dest = rateService.getByName("人民币");
         }
-        List<Rate> rates = rateService.query();
+        List<Rate> rates = rateService.query(null);
         List<RateDTO> rateDTOS = new ArrayList<>();
         for (Rate rate : rates) {
             if (rate.getName().equalsIgnoreCase(name)) {

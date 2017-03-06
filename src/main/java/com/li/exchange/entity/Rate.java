@@ -3,6 +3,7 @@ package com.li.exchange.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ public class Rate {
     @Id
     @Column
     @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(strategy = "uuid", name="system-uuid")
+    @GenericGenerator(strategy = "uuid", name = "system-uuid")
     private String id;
     @Column
     private String name;
@@ -27,10 +28,12 @@ public class Rate {
     private Double bought_in;
     @Column
     private Double bought_out;
-    @Column(name="order_r")
+    @Column(name = "order_r")
     private Integer order;
     @Column
     private Date createTime;
+    @Transient
+    private String timeStr;
 
     public String getId() {
         return id;
@@ -94,5 +97,12 @@ public class Rate {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTimeStr() {
+        if (this.getCreateTime() != null) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.getCreateTime());
+        }
+        return "";
     }
 }

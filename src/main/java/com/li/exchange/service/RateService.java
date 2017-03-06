@@ -19,8 +19,10 @@ public class RateService {
     @Resource
     private RateDao rateDao;
 
-    public List<Rate> query() {
-        Pageable pageable = new PageRequest(0, 9);
+    public List<Rate> query(Pageable pageable) {
+        if(pageable == null){
+            pageable = new PageRequest(0, 9);
+        }
         return rateDao.query(pageable);
     }
 
