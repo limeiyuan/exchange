@@ -49,9 +49,9 @@ public class HomeController {
             RateDTO dto = new RateDTO();
             dto.setName(name + "/" + rate.getName());
             dto.setTitle(name + "/" + rate.getName());
-            dto.setIn(Formater.formatDouble(dest.getBought_in() / rate.getBought_in(), 2));
-            dto.setOut(Formater.formatDouble(dest.getRate() / rate.getRate(), 2));
-            dto.setRate(Formater.formatDouble(rate.getRate(), 2));
+            dto.setIn(Formater.formatDouble(dest.getBought_in() / rate.getBought_in(), 4));
+            dto.setOut(Formater.formatDouble(dest.getBought_out() / rate.getBought_out(), 4));
+            dto.setRate(Formater.formatDouble(rate.getRate(), 4));
             rateDTOS.add(dto);
         }
         return rateDTOS;

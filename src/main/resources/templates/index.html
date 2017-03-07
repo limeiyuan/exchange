@@ -11,20 +11,29 @@
         }
 
         table {
+            width: 100%;
             align-items: center;
-            text-align: center;
+            text-align: left;
         }
 
         table .title td {
-            background: #666666;
+            background: #aaaaaa;
         }
 
         table .obb {
-            background: #aaaaaa;
+            background: #f4f4f4;
         }
 
         table input, select {
             width: 100%;
+        }
+        
+        .bought_in{
+            color: #ff1100;
+        }
+        
+        .bought_out{
+            color: #008000;
         }
 
         .tip{
@@ -39,7 +48,7 @@
     <h2>实时汇率</h2>
     <table id="rateTable">
         <tr class="title">
-            <td>货币对</td>
+            <td style="width: 50%">货币对</td>
             <td>买入价</td>
             <td>卖出价</td>
         </tr>
@@ -48,7 +57,7 @@
 <div>
     <h3 class="exchange">货币兑换器</h3>
     <form id="calForm">
-        <table>
+        <table style="width: 80%">
 
             <tr>
                 <td>
@@ -98,7 +107,7 @@
                 if (index % 2 != 0) {
                     $tr.addClass('obb');
                 }
-                $tr.append('<td>' + item['name'] + '</td><td>' + item['in'] + '</td><td>' + item['rate'] + '</td>');
+                $tr.append('<td>' + item['name'] + '</td><td class="bought_in">' + item['in'] + '</td><td class="bought_out">' + item['rate'] + '</td>');
                 $('#rateTable').append($tr);
             }
         });
