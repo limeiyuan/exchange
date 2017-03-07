@@ -26,6 +26,11 @@
         table input, select {
             width: 100%;
         }
+
+        .tip{
+            color: red;
+            font-size: x-small;
+        }
     </style>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 </head>
@@ -36,7 +41,7 @@
         <tr class="title">
             <td>货币对</td>
             <td>买入价</td>
-            <td>汇率</td>
+            <td>卖出价</td>
         </tr>
     </table>
 </div>
@@ -78,7 +83,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><button type="button" onclick="calculate()">计算</button></td>
+                <td colspan="2"><button type="button" onclick="calculate()">计算</button><span class="tip">*实时汇率仅供参考,准确的汇率需要和客服确认</span></td>
             </tr>
         </table>
     </form>
