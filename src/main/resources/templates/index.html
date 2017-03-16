@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>实时汇率查询</title>
     <link type="text/css" href="css/main.css"/>
     <style type="text/css">
@@ -27,18 +27,27 @@
         table input, select {
             width: 100%;
         }
-        
-        .bought_in{
+
+        .bought_in {
             color: #ff1100;
         }
-        
-        .bought_out{
+
+        .bought_out {
             color: #008000;
         }
 
-        .tip{
+        .tip {
             color: red;
             font-size: x-small;
+        }
+
+        .banner {
+            width: 100%;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
         }
     </style>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -54,48 +63,13 @@
         </tr>
     </table>
 </div>
-<div>
-    <h3 class="exchange">货币兑换器</h3>
-    <form id="calForm">
-        <table style="width: 80%">
-
-            <tr>
-                <td>
-                    买入货币：
-                </td>
-                <td>
-                    <select id="nameOut" name="inName"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    卖出货币：
-                </td>
-                <td>
-                    <select id="nameIn" name="outName"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    卖出金额：
-                </td>
-                <td>
-                    <input name="count" id="count" placeholder="1000">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    买入金额：
-                </td>
-                <td>
-                    <input name="bought_in" id="bought_in" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><button type="button" onclick="calculate()">计算</button><span class="tip">*实时汇率仅供参考,准确的汇率需要和客服确认</span></td>
-            </tr>
-        </table>
-    </form>
+<div id="bannerContainer" style="overflow: hidden">
+    <div class="banner" onclick="jumpTo('https://jinshuju.net/f/wfJFHM')">
+        <img src="img/banner1.jpg">
+    </div>
+    <div class="banner" onclick="jumpTo('https://jinshuju.net/f/wfJFHM')">
+        <img src="img/banner2.jpg">
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -122,7 +96,32 @@
                 $('#nameIn').append($op2);
             }
         });
+
+        var $parent = $('#bannerContainer');
+        var $first = $parent.find('div:first');
+        var height = $first.height();
+        $parent.css('height', height);
+
+        function doScroll() {
+            var $first = $parent.find('div:first');
+
+            $first.animate({
+                height: 0
+            }, 1500, function () {
+                $first.css('height', height).appendTo($parent);
+            });
+        }
+
+        setInterval(function () {
+            doScroll()
+        }, 2000);
     });
+
+    function jumpTo(url) {
+        if (url) {
+            window.location.href = url;
+        }
+    }
 
     function calculate() {
         var bought_in = $('#nameIn').val();
