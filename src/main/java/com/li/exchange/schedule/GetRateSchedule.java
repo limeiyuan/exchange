@@ -142,13 +142,13 @@ public class GetRateSchedule {
                     rate.setRate(getValue(record, 5, count));
 
                     if (rate.getBought_in() != null) {
-                        rate.setBought_in(rate.getBought_in() + 0.168);
+                        rate.setBought_in(rate.getBought_in() + 0.14);
                     }
                     if (rate.getBought_out() != null) {
-                        rate.setBought_out(rate.getBought_out() + 0.168);
+                        rate.setBought_out(rate.getBought_out() + 0.14);
                     }
                     if (rate.getRate() != null) {
-                        rate.setRate(rate.getRate() + 0.168);
+                        rate.setRate(rate.getRate() + 0.14);
                     }
                     rate.setCreateTime(new Date());
                     rateService.save(rate);

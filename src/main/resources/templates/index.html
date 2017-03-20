@@ -63,9 +63,9 @@
         </tr>
     </table>
 </div>
-<div id="bannerContainer" style="overflow: hidden">
+<div id="bannerContainer" style="overflow: hidden;padding-top: 10px;">
     <div class="banner" onclick="jumpTo('https://jinshuju.net/f/wfJFHM')">
-        <img src="img/banner1.jpg">
+        <img id="test" src="img/banner1.jpg">
     </div>
     <div class="banner" onclick="jumpTo('https://jinshuju.net/f/wfJFHM')">
         <img src="img/banner2.jpg">
@@ -73,6 +73,19 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.banner img').each(function (item) {
+            item.onload = function () {
+                var $parent = $('#bannerContainer');
+                var $first = $parent.find('div:first');
+                var height = $first.height();
+                $parent.css('height', height);
+            }
+        });
+
+        loaded();
+    });
+
+    function loaded() {
         $.get('getRate', function (response) {
             var index = 0, item;
             for (index; index < response.length; index++) {
@@ -115,7 +128,8 @@
         setInterval(function () {
             doScroll()
         }, 2000);
-    });
+    }
+    ;
 
     function jumpTo(url) {
         if (url) {
