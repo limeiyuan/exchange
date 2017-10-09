@@ -112,9 +112,8 @@
             async: true,
             success: function (data) {
                 signature = data.sign;
-
                 wx.config({
-                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: 'wx3d3983f770a1aafd', // 必填，公众号的唯一标识
                     timestamp: timestamp, // 必填，生成签名的时间戳
                     nonceStr: randomStr, // 必填，生成签名的随机串
@@ -126,7 +125,7 @@
                     wx.onMenuShareTimeline({
                         title: '鹏润汇金实时汇率查询', // 分享标题
                         link: url, // 分享链接
-                        imgUrl: 'http://www.fcgliuxue.com/exchange/20170416223512.jpg', // 分享图标
+                        imgUrl: 'http://www.fcgliuxue.com/exchange/img/20170416223512.jpg', // 分享图标
                         success: function () {
                         },
                         cancel: function () {
@@ -136,9 +135,9 @@
 
                     wx.onMenuShareAppMessage({
                         title: '鹏润汇金实时汇率查询', // 分享标题
-                        desc: '鹏润汇金致力于提供给客户优惠客观，安全快速的外汇体验，为您的海外投资助理！', // 分享描述
+                        desc: '鹏润汇金助力于提供给客户优惠客观，安全快速的外汇体验，为您的海外投资助理！', // 分享描述
                         link: url, // 分享链接
-                        imgUrl: 'http://www.fcgliuxue.com/exchange/20170416223512.jpg', // 分享图标
+                        imgUrl: 'http://www.fcgliuxue.com/exchange/img/20170416223512.jpg', // 分享图标
                         type: '', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
