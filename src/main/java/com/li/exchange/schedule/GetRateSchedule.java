@@ -33,7 +33,7 @@ public class GetRateSchedule {
     private final static String APPKEY = "0a7af06fbeb3585450ba9b7559494446";
 
     @PostConstruct
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/15 * * * ?")
     public void getRate() {
         String result;
         String url = "http://op.juhe.cn/onebox/exchange/query";//请求接口地址
@@ -44,6 +44,7 @@ public class GetRateSchedule {
             result = net(url, params, "GET");
             JSONObject object = new JSONObject(result);
             if (object.getInt("error_code") == 0) {
+                rateService.removeAll();
                 analyseData(object.getString("result"));
             } else {
                 System.out.println(object.get("error_code") + ":" + object.get("reason"));

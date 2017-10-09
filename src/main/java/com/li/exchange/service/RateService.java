@@ -35,6 +35,10 @@ public class RateService {
         rateDao.save(dest);
     }
 
+    public void removeAll(){
+        rateDao.deleteAll();
+    }
+
     public Rate getByName(String name) {
         return rateDao.getByName(name);
     }
