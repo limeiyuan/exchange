@@ -38,7 +38,7 @@ public class GetRateSchedule {
     private final static String APPKEY = "0a7af06fbeb3585450ba9b7559494446";
 
     @PostConstruct
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/15 * * * ?")
     public void getRate() {
         String result;
         String url = "http://op.juhe.cn/onebox/exchange/query";//请求接口地址
@@ -134,6 +134,7 @@ public class GetRateSchedule {
     private void analyseData(String data) {
         try {
             System.out.println(data);
+            System.out.println("汇率浮动参数=" + rateFloat);
             JSONObject object = new JSONObject(data);
             JSONArray array = object.getJSONArray("list");
             for (int index = 0; index < array.length(); index++) {
@@ -148,13 +149,13 @@ public class GetRateSchedule {
                     rate.setRate(getValue(record, 5, count));
 
                     if (rate.getBought_in() != null) {
-                        rate.setBought_in(rate.getBought_in() + 0.14);
+                        rate.setBought_in(rate.getBought_in() + rateFloat);
                     }
                     if (rate.getBought_out() != null) {
-                        rate.setBought_out(rate.getBought_out() + 0.14);
+                        rate.setBought_out(rate.getBought_out() + rateFloat);
                     }
                     if (rate.getRate() != null) {
-                        rate.setRate(rate.getRate() + 0.14);
+                        rate.setRate(rate.getRate() + rateFloat);
                     }
                     rate.setCreateTime(new Date());
                     rateService.save(rate);
