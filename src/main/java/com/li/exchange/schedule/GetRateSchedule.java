@@ -5,6 +5,7 @@ import com.li.exchange.service.RateService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
@@ -30,10 +31,14 @@ public class GetRateSchedule {
     @Resource
     private RateService rateService;
 
+    //价格浮动
+    @Value("${application.rate.float}")
+    private Float rateFloat;
+
     private final static String APPKEY = "0a7af06fbeb3585450ba9b7559494446";
 
     @PostConstruct
-    @Scheduled(cron = "0 0/15 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void getRate() {
         String result;
         String url = "http://op.juhe.cn/onebox/exchange/query";//请求接口地址
